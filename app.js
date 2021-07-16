@@ -5,6 +5,16 @@ const app = express()
 // 設定 port
 const port = 3000
 
+// 載入 express-handlebars
+const exphbs = require('express-handlebars')
+
+// 設定 把樣板引擎交給 Express-handlebars
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
+
+// 設定靜態檔案位置
+app.use(express.static('public'))
+
 // 載入 mongoose
 const mongoose = require('mongoose')
 
@@ -24,7 +34,7 @@ db.once('open', () => {
 
 // 設定首頁路由
 app.get('/', (req, res) => {
-  res.send('hello world')
+  res.render('index')
 })
 
 // 監聽本機伺服器 port 3000
