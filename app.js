@@ -5,6 +5,23 @@ const app = express()
 // 設定 port
 const port = 3000
 
+// 載入 mongoose
+const mongoose = require('mongoose')
+
+// 設定連線到 mongodb
+mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
+
+// 取得資料庫連線狀態
+const db = mongoose.connection
+
+db.on('error', () => {
+  console.log('mongodb error!')
+})
+
+db.once('open', () => {
+  console.log('mongodb connected!')
+})
+
 // 設定首頁路由
 app.get('/', (req, res) => {
   res.send('hello world')
