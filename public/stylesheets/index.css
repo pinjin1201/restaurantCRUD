@@ -35,10 +35,6 @@ header {
   color: #9b4b4b;
 }
 
-.add-restaurant > a {
-  color: #35303f;
-}
-
 .add-restaurant > a:link {
   font-size: 1.2em;
   text-align: center;
@@ -61,6 +57,10 @@ header {
   border-radius: 15px;
   background-color: #eed9c4;
   text-decoration: none;
+}
+
+.add-restaurant > a:visited {
+  color: #35303f;
 }
 
 .form-control::placeholder {
