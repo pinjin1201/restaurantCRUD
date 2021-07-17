@@ -42,9 +42,9 @@
 
 # 使用方法
 
-1. 開啟終端機，輸入 `git clone https://github.com/pinjin1201/restaurant-list.git`
+1. 開啟終端機，輸入 `git clone https://github.com/pinjin1201/restaurantCRUD.git`
 
-2. 進入此專案資料夾 `cd restaurant-list`
+2. 進入此專案資料夾 `cd restaurantCRUD`
 
 3. 安裝 npm 套件 `npm install`
 
