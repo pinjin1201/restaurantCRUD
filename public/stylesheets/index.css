@@ -35,6 +35,10 @@ header {
   color: #9b4b4b;
 }
 
+.add-restaurant > a {
+  color: #35303f;
+}
+
 .add-restaurant > a:link {
   font-size: 1.2em;
   text-align: center;
@@ -51,7 +55,7 @@ header {
   text-align: center;
   width: 80px;
   height: 30px;
-  color: #35303f;
+  color: #e8c15f;
   margin-left: 50px; 
   padding: 10px 10px;
   border-radius: 15px;
