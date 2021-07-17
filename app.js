@@ -88,6 +88,30 @@ app.get('/restaurants/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// 設定修改資料路由
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+// 修改的資料傳入資料庫
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  const name = req.params.name
+
+  return Restaurant.findById(id)
+    .then(todo => {
+      restaurant.name = name
+      return restaurant.save()
+    })
+    .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
+})
+
 // 監聽本機伺服器 port 3000
 app.listen(port, () => {
   console.log(`App is running on http://localhost:${port}`)
