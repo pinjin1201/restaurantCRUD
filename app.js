@@ -76,21 +76,12 @@ app.get('/restaurants/new', (req, res) => {
 
 // 新建的資料傳入資料庫
 app.post('/restaurants', (req, res) => {
-  const name = req.body.name
-  const name_en  = req.body.name_en 
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const google_map = req.body.google_map
-  const rating = req.body.rating
-  const description = req.body.description
+  const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
 
-  const restaurant = new Restaurant({ name, name_en, category, image, location, phone, google_map, rating, description
-  })
-
-  return restaurant.save()
-    .then(() => res.redirect('/'))
+  // 存入資料庫
+  return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating, description })     
+    // 新增完成後導回首頁
+    .then(() => res.redirect('/')) 
     .catch(error => console.log(error))
 })
 
@@ -117,16 +108,9 @@ app.get('/restaurants/:id/edit', (req, res) => {
 // 修改的資料傳入資料庫
 app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
-  const name = req.body.name
-  const name_en = req.body.name_en
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const google_map = req.body.google_map
-  const rating = req.body.rating
-  const description = req.body.description
-  
+
+  const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
+
   return Restaurant.findById(id)
     .then(restaurant => {
       restaurant.name = name
