@@ -53,6 +53,22 @@ app.get('/', (req, res) => {
     .catch(error => console.error(error)) 
 })
 
+// 設定 search 路由
+app.get('/search', (req, res) => {
+  const keyword = req.query.keyword.trim().toLowerCase()
+
+  Restaurant.find()
+    .lean()
+    .then(restaurants => {
+      restaurants = restaurants.filter(restaurant =>
+        restaurant.name.toLowerCase().includes(keyword) ||
+        restaurant.category.toLowerCase().includes(keyword)
+      )
+      res.render('index', { restaurants })
+    })
+    .catch(error => console.log(error))
+})
+
 // 設定新增資料路由
 app.get('/restaurants/new', (req, res) => {
   return res.render('new')
@@ -99,7 +115,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 // 修改的資料傳入資料庫
-app.get('/restaurants/:id/edit', (req, res) => {
+app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   const name = req.params.name
 
@@ -109,6 +125,15 @@ app.get('/restaurants/:id/edit', (req, res) => {
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
+})
+
+// 設定刪除路由
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById()
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
